@@ -40,9 +40,6 @@ class MainActivity : AppCompatActivity() {
             getContentsInfo()
         }
 
-        if(imageArrayList[0] != null){
-            slide.setImageURI(imageArrayList[0])
-        }
 
         start_button.setOnClickListener {
 
@@ -100,11 +97,16 @@ class MainActivity : AppCompatActivity() {
                     getContentsInfo()
                 }else{
                     Log.d("test","許可してください")
+                    notgetContentInfo()
                 }
         }
 
 
     }
+    private fun notgetContentInfo(){
+        imageArrayList = arrayListOf<Uri>()
+    }
+
     private fun getContentsInfo() {
         // 画像の情報を取得する
         val resolver = contentResolver
@@ -128,5 +130,8 @@ class MainActivity : AppCompatActivity() {
             } while (cursor.moveToNext())
         }
         cursor.close()
+        if(imageArrayList[0] != null){
+            slide.setImageURI(imageArrayList[0])
+        }
     }
 }
